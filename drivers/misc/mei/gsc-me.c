@@ -293,6 +293,15 @@ static const struct auxiliary_device_id mei_gsc_id_table[] = {
 		.driver_data = MEI_ME_GSCFI_CFG,
 	},
 	{
+		.name = "i915_ag.mei-gsc",
+		.driver_data = MEI_ME_GSC_CFG,
+
+	},
+	{
+		.name = "i915_ag.mei-gscfi",
+		.driver_data = MEI_ME_GSCFI_CFG,
+	},
+	{
 		/* sentinel */
 	}
 };
