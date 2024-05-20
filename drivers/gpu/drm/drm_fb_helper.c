@@ -1758,9 +1758,13 @@ void drm_fb_helper_fill_info(struct fb_info *info,
 	 * "simpledrmdrmfb" in /proc/fb. Unfortunately, it's an uAPI and can't
 	 * be changed due user-space tools (e.g: pm-utils) matching against it.
 	 */
-	snprintf(info->fix.id, sizeof(info->fix.id), "%sdrmfb",
-		 fb_helper->dev->driver->name);
-
+	if (strncmp(fb_helper->dev->driver->name, "i915", 4) == 0) {
+		snprintf(info->fix.id, sizeof(info->fix.id), "%sdrmfb",
+				"i915");
+	} else {
+		snprintf(info->fix.id, sizeof(info->fix.id), "%sdrmfb",
+				fb_helper->dev->driver->name);
+	}
 }
 EXPORT_SYMBOL(drm_fb_helper_fill_info);
 

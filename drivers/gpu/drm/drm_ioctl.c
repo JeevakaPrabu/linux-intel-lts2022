@@ -526,8 +526,14 @@ int drm_version(struct drm_device *dev, void *data,
 	version->version_major = dev->driver->major;
 	version->version_minor = dev->driver->minor;
 	version->version_patchlevel = dev->driver->patchlevel;
-	err = drm_copy_field(version->name, &version->name_len,
-			dev->driver->name);
+
+	if (strncmp(dev->driver->name, "i915", 4) == 0)
+		err = drm_copy_field(version->name, &version->name_len,
+				"i915");
+	else
+		err = drm_copy_field(version->name, &version->name_len,
+				dev->driver->name);
+
 	if (!err)
 		err = drm_copy_field(version->date, &version->date_len,
 				dev->driver->date);
